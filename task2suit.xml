@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="task2tests" parallel="false">
+    <test name="xml-test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="com.klindziuk.offlinelibrary.controller.admin.test.*"/>
+            <package name="com.klindziuk.offlinelibrary.controller.client.test.*"/>
+            <package name="com.klindziuk.offlinelibrary.controller.library.test.*"/>
+        </packages>
+    </test>
+</suite>

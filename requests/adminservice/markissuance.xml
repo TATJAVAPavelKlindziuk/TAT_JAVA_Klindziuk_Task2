@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<adminservice>		
+	<command>markissuance</command>
+	<userId>1</userId>
+	<bookId>1</bookId>
+</adminservice>     
+    

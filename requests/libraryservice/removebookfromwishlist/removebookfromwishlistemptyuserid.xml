@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<libraryservice>		
+	<command>RemoveBookFromWishList</command>
+	<userId></userId>
+	<bookId>5</bookId>
+</libraryservice>     

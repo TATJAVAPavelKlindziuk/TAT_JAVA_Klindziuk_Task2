@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<adminservice>		
+	<command>getUserBooks</command>
+	<id>1</id>
+</adminservice>     
