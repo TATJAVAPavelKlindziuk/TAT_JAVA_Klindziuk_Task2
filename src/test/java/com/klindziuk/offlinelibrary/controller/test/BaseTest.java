@@ -19,10 +19,10 @@ public class BaseTest {
 	protected DBconnector connector;
 	protected Connection connection;
 	protected String request;
-	
+
 	@BeforeClass
 	public void beforeClass() throws ClassNotFoundException, SQLException {
-		logger.info("Preparing environment...");
+		logger.info("Preparing test environment...");
 		System.out.println();
 		controller = new Controller();
 		connector = DBconnector.getInstance();
@@ -32,7 +32,14 @@ public class BaseTest {
 		SqlScriptRunner.run(connection, SQLFILEPATH + "fillbooks.sql");
 		SqlScriptRunner.run(connection, SQLFILEPATH + "fillusers.sql");
 		SqlScriptRunner.run(connection, SQLFILEPATH + "fillwish.sql");
-		connection.close();
+		try {
+			connection.close();
+		} catch (Exception e) {
+			/* ignored */ }
+		try {
+			connector.disconnect();
+		} catch (Exception e) {
+			/* ignored */ }
 		logger.info("Environment prepared successfully.");
 	}
 
