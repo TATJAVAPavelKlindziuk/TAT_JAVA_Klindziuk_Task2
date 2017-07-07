@@ -71,15 +71,15 @@ public class LibraryControllerTest extends BaseTest {
 
 	// compare size of strings to check equals
 	@Test(priority = 8)
-	public void FindByNameTest() throws IOException {
+	public void findByNameSmokeTest() throws IOException {
 		request = RequestParser.readFile(XMLFILEPATH + "libraryservice/findby/findbyname.xml");
 		int actual = controller.executeLibraryTask(request).length();
-		int expected = 103;
+		int expected = 99;
 		Assert.assertEquals(actual, expected);
 	}
 
 	@Test(priority = 9)
-	public void FindByNameEmptyTest() throws IOException {
+	public void findByNameEmptyTest() throws IOException {
 		request = RequestParser.readFile(XMLFILEPATH + "libraryservice/findby/findbynameempty.xml");
 		String actual = controller.executeLibraryTask(request);
 		String expected = "Cannot perform this operation.Parameters cannot be null or empty.";
@@ -87,7 +87,7 @@ public class LibraryControllerTest extends BaseTest {
 	}
 
 	@Test(priority = 10)
-	public void FindByNameNumbersTest() throws IOException {
+	public void findByNameNumbersTest() throws IOException {
 		request = RequestParser.readFile(XMLFILEPATH + "libraryservice/findby/findbynamenumbers.xml");
 		String actual = controller.executeLibraryTask(request);
 		String expected = "Cannot perform this operation.Only letters,dots,minus and whitespaces are allowed.";
@@ -95,7 +95,7 @@ public class LibraryControllerTest extends BaseTest {
 	}
 
 	@Test(priority = 11)
-	public void FindByNameSpecTest() throws IOException {
+	public void findByNameSpecTest() throws IOException {
 		request = RequestParser.readFile(XMLFILEPATH + "libraryservice/findby/findbynamespec.xml");
 		String actual = controller.executeLibraryTask(request);
 		String expected = "Cannot perform this operation.Only letters,dots,minus and whitespaces are allowed.";
@@ -104,7 +104,7 @@ public class LibraryControllerTest extends BaseTest {
 
 	// compare size of strings to check equals
 	@Test(priority = 12)
-	public void FindByAuthorTest() throws IOException {
+	public void findByAuthorTest() throws IOException {
 		request = RequestParser.readFile(XMLFILEPATH + "libraryservice/findby/findbyauthor.xml");
 		int actual = controller.executeLibraryTask(request).length();
 		int expected = 104;
@@ -198,7 +198,7 @@ public class LibraryControllerTest extends BaseTest {
 
 	// compare size of strings to check equals
 	@Test(priority = 23)
-	public void RemoveFromWishListEmptyBookIdTest() throws IOException {
+	public void removeFromWishListEmptyBookIdTest() throws IOException {
 		request = RequestParser.readFile(XMLFILEPATH + "libraryservice/removebookfromwishlist/removebookfromwishlistemptybookid.xml");
 		String actual = controller.executeLibraryTask(request);
 		String expected = "Cannot perform this operation.Parameters cannot be null or empty.";
@@ -206,7 +206,7 @@ public class LibraryControllerTest extends BaseTest {
 	}
 
 	@Test(priority = 24)
-	public void RemoveFromWishListNullUserIdTest() throws IOException {
+	public void removeFromWishListNullUserIdTest() throws IOException {
 		request = RequestParser.readFile(XMLFILEPATH + "libraryservice/removebookfromwishlist/removebookfromwishlistnullbookid.xml");
 		String actual = controller.executeLibraryTask(request);
 		String expected = "Cannot perform this operation.Only numbers allowed.Id cannot be zero.";
@@ -214,7 +214,7 @@ public class LibraryControllerTest extends BaseTest {
 	}
 
 	@Test(priority = 25)
-	public void RemoveFromWishListNullBookIdTest() throws IOException {
+	public void removeFromWishListNullBookIdTest() throws IOException {
 		request = RequestParser.readFile(XMLFILEPATH + "libraryservice/removebookfromwishlist/removebookfromwishlistnullbookid.xml");
 		String actual = controller.executeLibraryTask(request);
 		String expected = "Cannot perform this operation.Only numbers allowed.Id cannot be zero.";
@@ -222,7 +222,7 @@ public class LibraryControllerTest extends BaseTest {
 	}
 
 	@Test(priority = 26)
-	public void RemoveWishListEmptyUserIdTest() throws IOException {
+	public void removeWishListEmptyUserIdTest() throws IOException {
 		request = RequestParser.readFile(XMLFILEPATH + "libraryservice/removebookfromwishlist/removebookfromwishlistemptyuserid.xml");
 		String actual = controller.executeLibraryTask(request);
 		String expected = "Cannot perform this operation.Parameters cannot be null or empty.";
@@ -230,7 +230,7 @@ public class LibraryControllerTest extends BaseTest {
 	}
 	
 	@Test(priority = 27)
-	public void AddToWishListSpecUserIdTest() throws IOException {
+	public void addToWishListSpecUserIdTest() throws IOException {
 		request = RequestParser.readFile(XMLFILEPATH + "libraryservice/removebookfromwishlist/removebookfromwishlistspecuserid.xml");
 		String actual = controller.executeLibraryTask(request);
 		String expected = "Cannot perform this operation.Only numbers allowed.Id cannot be zero.";
@@ -238,7 +238,7 @@ public class LibraryControllerTest extends BaseTest {
 	}
 	
 	@Test(priority = 28)
-	public void RemoveWishListSpecBookIdTest() throws IOException {
+	public void removeWishListSpecBookIdTest() throws IOException {
 		request = RequestParser.readFile(XMLFILEPATH + "libraryservice/removebookfromwishlist/removebookfromwishlistspecbookid.xml");
 		String actual = controller.executeLibraryTask(request);
 		String expected = "Cannot perform this operation.Only numbers allowed.Id cannot be zero.";
