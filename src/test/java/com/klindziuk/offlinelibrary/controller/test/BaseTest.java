@@ -16,6 +16,12 @@ public class BaseTest {
 	private static final Logger logger = Logger.getLogger(BaseTest.class);
 	protected static final String XMLFILEPATH = "C:/Users/Pavel_Klindziuk/Program_Files/eclipse/workspace/offlinelibrary/requests/";
 	protected static final String SQLFILEPATH = "C:/Users/Pavel_Klindziuk/Program_Files/eclipse/workspace/offlinelibrary/sql/";
+	protected static final String START_PREPARING_MESSAGE = "Preparing test environment...";
+	protected static final String FINISH_PREPARING_MESSAGE = "Environment prepared successfully.";
+	protected static final String TEST_FINISH_MESSAGE = "Tests runs are finished";
+	protected static final String EMPTY_STRING_EXCEPTION_MESSAGE = "Cannot perform this operation.Parameters cannot be null or empty.";
+	protected static final String SPEC_STRING_EXCEPTION_MESSAGE = "Cannot perform this operation.Only letters,dots,minus and whitespaces are allowed.";
+	protected static final String NUMBER_EXCEPTION_MESSAGE = "Cannot perform this operation.Only numbers allowed.Id cannot be zero.";
 	protected Controller controller;
 	protected DBconnector connector;
 	protected Connection connection;
@@ -23,7 +29,7 @@ public class BaseTest {
 
 	@BeforeClass
 	public void beforeClass() throws ClassNotFoundException, SQLException {
-		logger.info("Preparing test environment...");
+		logger.info(START_PREPARING_MESSAGE);
 		System.out.println();
 		controller = new Controller();
 		connector = DBconnector.getInstance();
@@ -41,7 +47,7 @@ public class BaseTest {
 			connector.disconnect();
 		} catch (Exception e) {
 			/* ignored */ }
-		logger.info("Environment prepared successfully.");
+		logger.info(FINISH_PREPARING_MESSAGE);
 	}
 
 	@AfterClass
@@ -49,6 +55,6 @@ public class BaseTest {
 		controller = null;
 		connector = null;
 		request = null;
-		logger.info("Tests runs are finished");
+		logger.info(TEST_FINISH_MESSAGE);
 	}
 }

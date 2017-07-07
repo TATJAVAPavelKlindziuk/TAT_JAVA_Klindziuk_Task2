@@ -7,74 +7,76 @@ import org.testng.annotations.Test;
 
 import com.klindziuk.offlinelibrary.controller.util.RequestParser;
 
-public class MarkReturn extends BaseTest {
+
+public class MarkIssuanceTest extends BaseTest {
+	
 	@Test(priority = 1)
-	public void markReturnSmokeTest() throws IOException {
-		request = RequestParser.readFile(XMLFILEPATH + "adminservice/markreturn/markreturn.xml");
+	public void markIssuanceSmokeTest() throws IOException {
+		request = RequestParser.readFile(XMLFILEPATH + "adminservice/markissuance/markissuance.xml");
 		String actual = controller.executeAdminTask(request);
-		String expected = "Book returned successfully";
+		String expected = "Book issued successfully.";
 		Assert.assertEquals(actual, expected);
 	}
 
 	@Test(priority = 2)
-	public void markReturnNullBookIdTest() throws IOException {
-		request = RequestParser.readFile(XMLFILEPATH + "adminservice/markreturn/markreturnnullbookid.xml");
+	public void markIssuanceNullBookIdTest() throws IOException {
+		request = RequestParser.readFile(XMLFILEPATH + "adminservice/markissuance/markissuancenullbookid.xml");
 		String actual = controller.executeAdminTask(request);
 		String expected = "Cannot perform this operation.Only numbers allowed.Id cannot be zero.";
 		Assert.assertEquals(actual, expected);
 	}
 
 	@Test(priority = 3)
-	public void markReturnNullUserIdTest() throws IOException {
-		request = RequestParser.readFile(XMLFILEPATH + "adminservice/markreturn/markreturnnulluserid.xml");
+	public void markIssuanceNullUserIdTest() throws IOException {
+		request = RequestParser.readFile(XMLFILEPATH + "adminservice/markissuance/markissuancenulluserid.xml");
 		String actual = controller.executeAdminTask(request);
 		String expected = "Cannot perform this operation.Only numbers allowed.Id cannot be zero.";
 		Assert.assertEquals(actual, expected);
 	}
 
 	@Test(priority = 4)
-	public void markReturnEmptyUserIdTest() throws IOException {
-		request = RequestParser.readFile(XMLFILEPATH + "adminservice/markreturn/markreturnemptyuserid.xml");
+	public void markIssuanceEmptyUserIdTest() throws IOException {
+		request = RequestParser.readFile(XMLFILEPATH + "adminservice/markissuance/markissuanceemptyuserid.xml");
 		String actual = controller.executeAdminTask(request);
 		String expected = "Cannot perform this operation.Parameters cannot be null or empty.";
 		Assert.assertEquals(actual, expected);
 	}
 	
 	@Test(priority = 5)
-	public void markReturnEmptyBookIdTest() throws IOException {
-		request = RequestParser.readFile(XMLFILEPATH + "adminservice/markreturn/markreturnemptybookid.xml");
+	public void markIssuanceEmptyBookIdTest() throws IOException {
+		request = RequestParser.readFile(XMLFILEPATH + "adminservice/markissuance/markissuanceemptybookid.xml");
 		String actual = controller.executeAdminTask(request);
 		String expected = "Cannot perform this operation.Parameters cannot be null or empty.";
 		Assert.assertEquals(actual, expected);
 	}
 	
 	@Test(priority = 6)
-	public void markReturnSpecUserIdTest() throws IOException {
-		request = RequestParser.readFile(XMLFILEPATH + "adminservice/markreturn/markreturnspecuserid.xml");
+	public void markIssuanceSpecUserIdTest() throws IOException {
+		request = RequestParser.readFile(XMLFILEPATH + "adminservice/markissuance/markissuancespecuserid.xml");
+		String actual = controller.executeAdminTask(request);
+		String expected = "Cannot perform this operation.Only numbers allowed.Id cannot be zero.";
+		Assert.assertEquals(actual, expected);
+	}
+	
+	@Test(priority = 6)
+	public void markIssuanceSpecBookIdTest() throws IOException {
+		request = RequestParser.readFile(XMLFILEPATH + "adminservice/markissuance/markissuancespecbookid.xml");
 		String actual = controller.executeAdminTask(request);
 		String expected = "Cannot perform this operation.Only numbers allowed.Id cannot be zero.";
 		Assert.assertEquals(actual, expected);
 	}
 	
 	@Test(priority = 7)
-	public void markReturnSpecBookIdTest() throws IOException {
-		request = RequestParser.readFile(XMLFILEPATH + "adminservice/markreturn/markreturnspecbookid.xml");
+	public void markIssuanceLettersBookIdTest() throws IOException {
+		request = RequestParser.readFile(XMLFILEPATH + "adminservice/markissuance/markissuancelettersbookid.xml");
 		String actual = controller.executeAdminTask(request);
 		String expected = "Cannot perform this operation.Only numbers allowed.Id cannot be zero.";
 		Assert.assertEquals(actual, expected);
 	}
 	
 	@Test(priority = 8)
-	public void markReturnLettersBookIdTest() throws IOException {
-		request = RequestParser.readFile(XMLFILEPATH + "adminservice/markreturn/markreturnlettersbookid.xml");
-		String actual = controller.executeAdminTask(request);
-		String expected = "Cannot perform this operation.Only numbers allowed.Id cannot be zero.";
-		Assert.assertEquals(actual, expected);
-	}
-	
-	@Test(priority = 9)
-	public void markReturnLettersUserIdTest() throws IOException {
-		request = RequestParser.readFile(XMLFILEPATH + "adminservice/markreturn/markreturnlettersuserid.xml");
+	public void markIssuanceLettersUserIdTest() throws IOException {
+		request = RequestParser.readFile(XMLFILEPATH + "adminservice/markissuance/markissuancelettersuserid.xml");
 		String actual = controller.executeAdminTask(request);
 		String expected = "Cannot perform this operation.Only numbers allowed.Id cannot be zero.";
 		Assert.assertEquals(actual, expected);

@@ -30,8 +30,10 @@ public class RemoveAdminRole implements Command {
 			}
 		} catch (ServiceException seex) {
 			logger.error(seex.getMessage(), seex);
+			response = UNSUCCESSFUL_OPERATION_MESSAGE + seex.getMessage();
 		} catch (IllegalArgumentException ieax) {
 			logger.error(ieax.getMessage(), ieax);
+			response = UNSUCCESSFUL_OPERATION_MESSAGE + ieax.getMessage();
 		}
 		return response;
 	}
