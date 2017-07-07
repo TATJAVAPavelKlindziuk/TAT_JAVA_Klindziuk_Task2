@@ -5,25 +5,28 @@ import java.util.HashMap;
 import javax.naming.OperationNotSupportedException;
 
 import com.klindziuk.offlinelibrary.controller.Command;
-import com.klindziuk.offlinelibrary.controller.command.admin.impl.AddBook;
-import com.klindziuk.offlinelibrary.controller.command.admin.impl.BanUser;
-import com.klindziuk.offlinelibrary.controller.command.admin.impl.DeleteBook;
-import com.klindziuk.offlinelibrary.controller.command.admin.impl.DeleteBookById;
-import com.klindziuk.offlinelibrary.controller.command.admin.impl.GetAllBooks;
-import com.klindziuk.offlinelibrary.controller.command.admin.impl.GetAllSubscriptions;
-import com.klindziuk.offlinelibrary.controller.command.admin.impl.GetAllUsers;
-import com.klindziuk.offlinelibrary.controller.command.admin.impl.GetUser;
-import com.klindziuk.offlinelibrary.controller.command.admin.impl.GiveAdminRole;
-import com.klindziuk.offlinelibrary.controller.command.admin.impl.MarkIssuance;
-import com.klindziuk.offlinelibrary.controller.command.admin.impl.MarkReturn;
-import com.klindziuk.offlinelibrary.controller.command.admin.impl.RemoveAdminRole;
-import com.klindziuk.offlinelibrary.controller.command.admin.impl.SetBookDeprecated;
-import com.klindziuk.offlinelibrary.controller.command.admin.impl.UnBanUser;
-import com.klindziuk.offlinelibrary.controller.command.admin.impl.UpdateBookDescription;
-import com.klindziuk.offlinelibrary.controller.command.library.impl.FindByAuthor;
-import com.klindziuk.offlinelibrary.controller.command.library.impl.FindByName;
-import com.klindziuk.offlinelibrary.controller.command.library.impl.GetBook;
-import com.klindziuk.offlinelibrary.controller.command.library.impl.GetUserBooks;
+import com.klindziuk.offlinelibrary.controller.command.impl.AddBook;
+import com.klindziuk.offlinelibrary.controller.command.impl.AddBookToWishList;
+import com.klindziuk.offlinelibrary.controller.command.impl.BanUser;
+import com.klindziuk.offlinelibrary.controller.command.impl.DeleteBook;
+import com.klindziuk.offlinelibrary.controller.command.impl.DeleteBookById;
+import com.klindziuk.offlinelibrary.controller.command.impl.FindByAuthor;
+import com.klindziuk.offlinelibrary.controller.command.impl.FindByName;
+import com.klindziuk.offlinelibrary.controller.command.impl.GetAllBooks;
+import com.klindziuk.offlinelibrary.controller.command.impl.GetAllSubscriptions;
+import com.klindziuk.offlinelibrary.controller.command.impl.GetAllUsers;
+import com.klindziuk.offlinelibrary.controller.command.impl.GetBook;
+import com.klindziuk.offlinelibrary.controller.command.impl.GetUser;
+import com.klindziuk.offlinelibrary.controller.command.impl.GetUserBooks;
+import com.klindziuk.offlinelibrary.controller.command.impl.GiveAdminRole;
+import com.klindziuk.offlinelibrary.controller.command.impl.MarkIssuance;
+import com.klindziuk.offlinelibrary.controller.command.impl.MarkReturn;
+import com.klindziuk.offlinelibrary.controller.command.impl.RemoveAdminRole;
+import com.klindziuk.offlinelibrary.controller.command.impl.RemoveBookFromWishList;
+import com.klindziuk.offlinelibrary.controller.command.impl.SetBookDeprecated;
+import com.klindziuk.offlinelibrary.controller.command.impl.UnBanUser;
+import com.klindziuk.offlinelibrary.controller.command.impl.UpdateBookDescription;
+import com.klindziuk.offlinelibrary.controller.command.impl.UpdateProfile;
 
 public enum AdminCommandName {	
 
@@ -45,8 +48,11 @@ public enum AdminCommandName {
 	    FINDBYAUTHOR(new FindByAuthor()),
 		GETUSER(new GetUser()),
 		GETALLUSERS(new GetAllUsers()),
-		GETALLSUBSCRIPTIONS(new GetAllSubscriptions());
-	    
+		GETALLSUBSCRIPTIONS(new GetAllSubscriptions()),
+		ADDBOOKTOWISHLIST(new AddBookToWishList()),
+	    REMOVEBOOKFROMWISHLIST(new RemoveBookFromWishList()),
+	    UPDATEPROFILE(new UpdateProfile());
+	    	    
 		private static final String UNSUPPORTED_OPERATION_MESSAGE = " - this command unfortunately unsupported.";
 		private Command command;
 	    private static HashMap<String, Command> adminCommandMap;

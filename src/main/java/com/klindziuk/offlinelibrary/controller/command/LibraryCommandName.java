@@ -5,14 +5,14 @@ import java.util.HashMap;
 import javax.naming.OperationNotSupportedException;
 
 import com.klindziuk.offlinelibrary.controller.Command;
-import com.klindziuk.offlinelibrary.controller.command.admin.impl.GetAllBooks;
-import com.klindziuk.offlinelibrary.controller.command.library.impl.AddBookToWishList;
-import com.klindziuk.offlinelibrary.controller.command.library.impl.FindByAuthor;
-import com.klindziuk.offlinelibrary.controller.command.library.impl.FindByName;
-import com.klindziuk.offlinelibrary.controller.command.library.impl.GetBook;
-import com.klindziuk.offlinelibrary.controller.command.library.impl.GetUserBooks;
-import com.klindziuk.offlinelibrary.controller.command.library.impl.RemoveBookFromWishList;
-import com.klindziuk.offlinelibrary.controller.command.library.impl.UpdateProfile;
+import com.klindziuk.offlinelibrary.controller.command.impl.AddBookToWishList;
+import com.klindziuk.offlinelibrary.controller.command.impl.FindByAuthor;
+import com.klindziuk.offlinelibrary.controller.command.impl.FindByName;
+import com.klindziuk.offlinelibrary.controller.command.impl.GetAllBooks;
+import com.klindziuk.offlinelibrary.controller.command.impl.GetBook;
+import com.klindziuk.offlinelibrary.controller.command.impl.GetUserBooks;
+import com.klindziuk.offlinelibrary.controller.command.impl.RemoveBookFromWishList;
+import com.klindziuk.offlinelibrary.controller.command.impl.UpdateProfile;
 
 public enum LibraryCommandName {
 		

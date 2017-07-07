@@ -5,10 +5,10 @@ import java.util.HashMap;
 import javax.naming.OperationNotSupportedException;
 
 import com.klindziuk.offlinelibrary.controller.Command;
-import com.klindziuk.offlinelibrary.controller.command.client.impl.Registration;
-import com.klindziuk.offlinelibrary.controller.command.client.impl.SignOut;
-import com.klindziuk.offlinelibrary.controller.command.client.impl.SingIn;
-import com.klindziuk.offlinelibrary.controller.command.client.impl.GetAllBooks;
+import com.klindziuk.offlinelibrary.controller.command.impl.GetAllBooks;
+import com.klindziuk.offlinelibrary.controller.command.impl.Registration;
+import com.klindziuk.offlinelibrary.controller.command.impl.SignOut;
+import com.klindziuk.offlinelibrary.controller.command.impl.SingIn;
 
 public enum ClientCommandName {
 

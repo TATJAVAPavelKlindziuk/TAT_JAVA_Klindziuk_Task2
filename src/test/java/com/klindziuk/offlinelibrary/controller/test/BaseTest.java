@@ -1,6 +1,7 @@
 package com.klindziuk.offlinelibrary.controller.test;
 
 import com.klindziuk.offlinelibrary.controller.Controller;
+import com.klindziuk.offlinelibrary.controller.util.SqlScriptRunner;
 import com.klindziuk.offlinelibrary.dao.util.DBconnector;
 
 import org.testng.annotations.BeforeClass;
