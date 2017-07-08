@@ -12,23 +12,23 @@ public class MarkReturnTest extends BaseTest {
 	private static final String MARKRETRUN_XML_PATH = XMLFILEPATH + "adminservice/markreturn/";
 	@Test(priority = 0)
 	public void markReturnSmokeTest() throws IOException {
-		request = RequestParser.readFile(XMLFILEPATH + "adminservice/markreturn/markreturn.xml");
+		request = RequestParser.readFile(MARKRETRUN_XML_PATH + "markreturn.xml");
 		String actual = controller.executeAdminTask(request);
 		String expected = "Book returned successfully";
 		Assert.assertEquals(actual, expected);
 	}
 
 	@DataProvider
-	public Object[][] markReturnUserId() throws IOException {
+	public Object[][] markReturnUserIdDp() throws IOException {
 		return new Object[][] {
-				{ MARKRETRUN_XML_PATH + "markreturnlettersuserid.xml","Cannot perform this operation.Only numbers allowed.Id cannot be zero."},
-				{ MARKRETRUN_XML_PATH + "markreturnspecuserid.xml",	"Cannot perform this operation.Only numbers allowed.Id cannot be zero."},
-				{ MARKRETRUN_XML_PATH + "markreturnemptyuserid.xml","Cannot perform this operation.Parameters cannot be null or empty."},
-				{ MARKRETRUN_XML_PATH + "markreturnnulluserid.xml","Cannot perform this operation.Only numbers allowed.Id cannot be zero."},
+				{ MARKRETRUN_XML_PATH + "markreturnlettersuserid.xml",NUMBER_EXCEPTION_MESSAGE},
+				{ MARKRETRUN_XML_PATH + "markreturnspecuserid.xml",	NUMBER_EXCEPTION_MESSAGE},
+				{ MARKRETRUN_XML_PATH + "markreturnemptyuserid.xml", EMPTY_STRING_EXCEPTION_MESSAGE},
+				{ MARKRETRUN_XML_PATH + "markreturnnulluserid.xml", NUMBER_EXCEPTION_MESSAGE},
 			    };
 	}
 
-	@Test(priority = 1,dataProvider = "markReturnUserId")
+	@Test(priority = 1,dataProvider = "markReturnUserIdDp")
 	public void markReturnUserIdTest(String request, String expected) throws IOException {
 		String command = RequestParser.readFile(request);
 		String actual = controller.executeAdminTask(command);
@@ -36,16 +36,16 @@ public class MarkReturnTest extends BaseTest {
 	}
 	
 	@DataProvider
-	public Object[][] markReturnBookId() throws IOException {
+	public Object[][] markReturnBookIdDp() throws IOException {
 		return new Object[][] {
-				{ MARKRETRUN_XML_PATH + "markreturnlettersbookid.xml","Cannot perform this operation.Only numbers allowed.Id cannot be zero."},
-				{ MARKRETRUN_XML_PATH + "markreturnspecbookid.xml",	"Cannot perform this operation.Only numbers allowed.Id cannot be zero."},
-				{ MARKRETRUN_XML_PATH + "markreturnemptybookid.xml","Cannot perform this operation.Parameters cannot be null or empty."},
-				{ MARKRETRUN_XML_PATH + "markreturnnullbookid.xml","Cannot perform this operation.Only numbers allowed.Id cannot be zero."},
+				{ MARKRETRUN_XML_PATH + "markreturnlettersbookid.xml", NUMBER_EXCEPTION_MESSAGE},
+				{ MARKRETRUN_XML_PATH + "markreturnspecbookid.xml",	NUMBER_EXCEPTION_MESSAGE},
+				{ MARKRETRUN_XML_PATH + "markreturnemptybookid.xml", EMPTY_STRING_EXCEPTION_MESSAGE},
+				{ MARKRETRUN_XML_PATH + "markreturnnullbookid.xml", NUMBER_EXCEPTION_MESSAGE},
 				};
 	}
 
-	@Test(priority = 2,dataProvider = "markReturnBookId")
+	@Test(priority = 2,dataProvider = "markReturnBookIdDp")
 	public void markReturnBookIdTest(String request, String expected) throws IOException {
 		String command = RequestParser.readFile(request);
 		String actual = controller.executeAdminTask(command);

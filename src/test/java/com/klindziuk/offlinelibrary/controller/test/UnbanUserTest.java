@@ -9,7 +9,6 @@ import org.testng.annotations.Test;
 import com.klindziuk.offlinelibrary.controller.util.RequestParser;
 
 public class UnbanUserTest extends BaseTest {
-
 	private static final String UNBANUSER_XML_PATH = XMLFILEPATH + "adminservice/unbanuser/";
 
 	@Test(priority = 0)
