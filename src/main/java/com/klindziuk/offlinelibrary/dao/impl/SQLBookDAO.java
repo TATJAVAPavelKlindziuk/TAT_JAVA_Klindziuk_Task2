@@ -27,22 +27,24 @@ public class SQLBookDAO implements BookDAO {
 	private static final String BOOK_IS_AVAILABLE_COLUMN_LABEL = "isAvailable";
 	private static final String BOOK_IS_DEPRECATED_LABEL = "isDeprecated";
 	private static final String BOOKS_ADDITION_DATE_COLUMN_LABEL = "additionDate";
+	private static final String SQL_EXCEPTION_MESSAGE = "Cannot perform SQL command";
+	private static final String EMPTY_EXCEPTION_MESSAGE = "Unfortunatelly we don't have this books.";
+	private static final String FINDBY_NAME_EXCEPTION_MESSAGE = "There are no books with this name";
+	private static final String FINDBY_AUTHOR_EXCEPTION_MESSAGE = "There are no authors with this name";
 	private static final String BOOK_UPDATE_QUERY = "UPDATE books SET isAvailable = ?  WHERE id = ?";
 	private static final String BOOK_NAME_QUERY = "SELECT id, name from books";
 	private static final String BOOK_AUTHOR_QUERY = "SELECT id, author from books";
 	private static final String ADD_BOOK_QUERY = "INSERT INTO books (name, author, year, isAvailable, isDeprecated) VALUES (?, ?, ?, ?, ?)";
 	private static final String UPDATE_BOOK_QUERY = "UPDATE books SET name = ?, author = ?  WHERE id = ?";
-	private static final String DEPRECATE_BOOK_QUERY = "UPDATE books SET name = ?, author = ?, year = ?, isAvailable = ?, isDeprecated = ? WHERE id = ?";
 	private static final String DELETE_BOOK_QUERY = "DELETE FROM books where id = ?";
-	private static final String SQL_EXCEPTION_MESSAGE = "Cannot perform SQL command";
-	private static final String EMPTY_EXCEPTION_MESSAGE = "Unfortunatelly we don't have this books.";
-	private static final String FINDBY_NAME_EXCEPTION_MESSAGE = "There are no books with this name";
-	private static final String FINDBY_AUTHOR_EXCEPTION_MESSAGE = "There are no authors with this name";
+	private static final String DEPRECATE_BOOK_QUERY = "UPDATE books SET name = ?, author = ?, year = ?, isAvailable = ?, isDeprecated = ?"
+			+ " WHERE id = ?";
 	private static final String GET_BOOK_QUERY = "SELECT books.id, books.name, books.author, books.year,"
 			+ " books.isAvailable, books.isDeprecated, books.additionDate FROM books WHERE id = ?";
 	private static final String SELECT_ALL_BOOK_QUERY = "SELECT books.id, books.name, books.author, books.year,"
 			+ " books.isAvailable, books.isDeprecated, books.additionDate FROM books ";
-	private static final String SELECT_USER_BOOKS_QUERY = "SELECT DISTINCT books.id, books.name, books.author, books.year, books.isAvailable, books.isDeprecated, books.additionDate FROM library.books "
+	private static final String SELECT_USER_BOOKS_QUERY = "SELECT DISTINCT books.id, books.name, books.author, books.year,"
+			+ " books.isAvailable, books.isDeprecated, books.additionDate FROM library.books "
 			+ "INNER JOIN library.subscriptions ON library.books.id = library.subscriptions.sb_book "
 			+ "INNER JOIN library.users ON library.users.id = library.subscriptions.sb_user "
 			+ "WHERE library.users.id = ? AND subscriptions.sb_is_active = 1";

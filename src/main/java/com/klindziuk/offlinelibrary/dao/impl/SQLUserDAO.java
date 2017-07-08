@@ -28,20 +28,20 @@ public class SQLUserDAO implements UserDAO {
 	private static final String USER_IS_ADMIN_COLUMN_LABEL = "isAdmin";
 	private static final String USER_IS_BANNED_LABEL = "isBanned";
 	private static final String USER_CREATION_DATE_COLUMN_LABEL = "creationDate";
+	private static final String LOGIN_EXCEPTION_MESSAGE = "Login error.There are no users with this credentials.";
+	private static final String DUPLICATE_LOGIN_EXCEPTION_MESSAGE = "User with this name already registered.";
+	private static final String SQL_EXCEPTION_MESSAGE = "Cannot perform SQL command";
+	private static final String EMPTY_EXCEPTION_MESSAGE = "There are no users";
 	private static final String ADD_BOOK_TO_WISHLIST_QUERY = "INSERT INTO wishes (w_user, w_book) VALUES (?, ? )";
 	private static final String REMOVE_BOOK_FROM_WISHLIST_QUERY = "DELETE FROM wishes WHERE w_user = ? AND w_book = ?";
-	private static final String GET_USER_QUERY = "SELECT * FROM users WHERE id = ?";
+	private static final String GET_USER_QUERY = "SELECT id, login, password, name, isAdmin, isBanned, creationDate FROM users WHERE id = ?";
 	private static final String USER_CREDENTIALS_QUERY = "SELECT login, password, isAdmin, isBanned FROM users ";
 	private static final String USER_REGISTER_QUERY = "INSERT INTO users (login, password, name, isAdmin, isBanned) VALUES (?, ?, ?, ?, ?)";
 	private static final String USER_UPDATE_QUERY = "UPDATE users SET name = ?  WHERE id = ?";
 	private static final String SELECT_ALL_USERS_QUERY = "SELECT id, login, password, name, isAdmin, isBanned, creationDate FROM users ";
 	private static final String ADMIN_QUERY = "UPDATE users SET isAdmin = ?  WHERE id = ?";
 	private static final String BAN_QUERY = "UPDATE users SET isBanned = ?  WHERE id = ?";
-	private static final String LOGIN_EXCEPTION_MESSAGE = "Login error.There are no users with this credentials.";
-	private static final String DUPLICATE_LOGIN_EXCEPTION_MESSAGE = "User with this name already registered.";
-	private static final String SQL_EXCEPTION_MESSAGE = "Cannot perform SQL command";
-	private static final String EMPTY_EXCEPTION_MESSAGE = "There are no users";
-
+	
 	DBconnector connector;
 	PreparedStatement preparedStatement;
 	Statement statement;

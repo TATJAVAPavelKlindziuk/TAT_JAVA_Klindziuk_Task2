@@ -6,7 +6,6 @@ import com.klindziuk.offlinelibrary.dao.exception.DAOException;
 import com.klindziuk.offlinelibrary.model.Book;
 
 public interface BookDAO {
-					
 	boolean addBook(Book book) throws DAOException;                    								
 	boolean updateBookDescription(int bookId, String name, String author) throws DAOException;      
 	boolean setBookAvailable(int bookId) throws DAOException;       							    

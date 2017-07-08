@@ -15,8 +15,8 @@ import com.klindziuk.offlinelibrary.service.exception.ServiceException;
 public class ClientServiceImpl implements ClientService {
 	private static final String CREDENTIALS_NULL_MESSAGE_EXCEPTION = "Login or password cannot be null.";
 	private static final String USER_NULL_MESSAGE_EXCEPTION = "There is no user found.";
-	 UserDAO userDao =  DAOFactory.getInstance().getUserDAO();
-	 BookDAO bookDao =  DAOFactory.getInstance().getBookDAO();
+	private final UserDAO userDao =  DAOFactory.getInstance().getUserDAO();
+	private final BookDAO bookDao =  DAOFactory.getInstance().getBookDAO();
 	
 	@Override
 	public boolean signIn(String login, String password) throws ServiceException {

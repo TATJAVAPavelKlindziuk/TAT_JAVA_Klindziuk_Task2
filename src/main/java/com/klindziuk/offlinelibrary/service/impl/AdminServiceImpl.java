@@ -20,9 +20,9 @@ public class AdminServiceImpl extends CommonBookServiceImpl implements AdminServ
 	private static final String NULL_BOOK_UPDATE_MESSAGE = "Cannot update with zero parameters.";
 	private static final String NULL_BOOK_DELETE_EXCEPTION_MESSAGE = "Cannot remove null.";
 	private static final String NULL_USER_EXCEPTION_MESSAGE = "Cannot perform operation with null user.";
-	UserDAO userDao = DAOFactory.getInstance().getUserDAO();
-	BookDAO bookDao = DAOFactory.getInstance().getBookDAO();
-	SubscribeDAO sbDao = DAOFactory.getInstance().getSubscriptionDAO();
+	private final UserDAO userDao = DAOFactory.getInstance().getUserDAO();
+	private final BookDAO bookDao = DAOFactory.getInstance().getBookDAO();
+	private final SubscribeDAO sbDao = DAOFactory.getInstance().getSubscriptionDAO();
 
 	@Override
 	public boolean addBook(Book book) throws ServiceException {

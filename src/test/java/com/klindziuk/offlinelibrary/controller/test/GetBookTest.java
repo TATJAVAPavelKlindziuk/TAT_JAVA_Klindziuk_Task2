@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import com.klindziuk.offlinelibrary.controller.util.RequestParser;
 
-public class GetBook extends BaseTest{
+public class GetBookTest extends BaseTest{
 	private static final String GETBOOK_XML_PATH = XMLFILEPATH + "libraryservice/getbook/";
 	
 	@Test(priority = 0)

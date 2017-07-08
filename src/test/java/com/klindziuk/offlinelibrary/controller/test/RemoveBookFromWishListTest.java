@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import com.klindziuk.offlinelibrary.controller.util.RequestParser;
 
-public class RemoveBookFromWishList extends BaseTest {
+public class RemoveBookFromWishListTest extends BaseTest {
 private static final String FROMWISHLIST_XML_PATH = XMLFILEPATH + "libraryservice/removebookfromwishlist/";
 	
 	@Test(priority = 0)

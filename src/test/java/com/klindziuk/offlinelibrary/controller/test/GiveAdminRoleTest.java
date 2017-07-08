@@ -8,10 +8,6 @@ import org.testng.annotations.Test;
 
 import com.klindziuk.offlinelibrary.controller.util.RequestParser;
 
-/**
- * Test cases are the same for RemoveAdminRole
- *
- */
 public class GiveAdminRoleTest extends BaseTest {
 	private static final String GIVEADMIN_XML_PATH = XMLFILEPATH + "adminservice/giveadminrole/";
 

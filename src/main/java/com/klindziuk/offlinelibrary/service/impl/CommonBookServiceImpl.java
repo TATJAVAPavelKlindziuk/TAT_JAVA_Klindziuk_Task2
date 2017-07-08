@@ -14,7 +14,7 @@ public class CommonBookServiceImpl {
 	protected static final String AUTHOR_NULL_MESSAGE_EXCEPTION = "There is no user with empty author.";
 	protected static final String BOOK_NULL_MESSAGE_EXCEPTION = "There is no book with this id.";
 	protected static final String USER_NULL_MESSAGE_EXCEPTION = "There is no user with this id.";
-	BookDAO bookDao = DAOFactory.getInstance().getBookDAO();
+	private final BookDAO bookDao = DAOFactory.getInstance().getBookDAO();
 
 	public Book getBook(int bookId) throws ServiceException {
 		Book book = null;

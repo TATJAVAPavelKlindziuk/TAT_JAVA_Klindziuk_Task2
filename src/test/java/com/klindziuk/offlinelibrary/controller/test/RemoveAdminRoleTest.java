@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import com.klindziuk.offlinelibrary.controller.util.RequestParser;
 
-public class RemoveAdminRole extends BaseTest {
+public class RemoveAdminRoleTest extends BaseTest {
 	private static final String REMOVEADMIN_XML_PATH = XMLFILEPATH + "adminservice/removeadminrole/";
 
 	@Test(priority = 0)

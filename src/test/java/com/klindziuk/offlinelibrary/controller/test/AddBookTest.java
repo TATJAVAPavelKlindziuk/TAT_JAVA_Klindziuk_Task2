@@ -18,13 +18,7 @@ public class AddBookTest extends BaseTest {
 		String expected = "Book added successfully.";
 		Assert.assertEquals(actual, expected);
 	}
-
-	@Test(priority = 1, expectedExceptions = IllegalArgumentException.class)
-	public void epmtyCommandTest() throws IOException {
-		request = RequestParser.readFile(ADDBOOK_XML_PATH + "emptycommand.xml");
-		controller.executeAdminTask(request);
-	}
-
+	
 	@DataProvider
 	public Object[][] addBookEmptyFieldsDp() throws IOException {
 		return new Object[][] { 
@@ -33,7 +27,7 @@ public class AddBookTest extends BaseTest {
 				{ ADDBOOK_XML_PATH + "emptyyear.xml", EMPTY_STRING_EXCEPTION_MESSAGE }, };
 	}
 
-	@Test(priority = 2, dataProvider = "addBookEmptyFieldsDp")
+	@Test(priority = 1, dataProvider = "addBookEmptyFieldsDp")
 	public void addBookEmptyFieldsTest(String request, String expected) throws IOException {
 		String command = RequestParser.readFile(request);
 		String actual = controller.executeAdminTask(command);

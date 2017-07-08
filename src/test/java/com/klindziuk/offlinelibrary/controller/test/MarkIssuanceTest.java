@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 
 import com.klindziuk.offlinelibrary.controller.util.RequestParser;
 
-
 public class MarkIssuanceTest extends BaseTest {
 	private static final String MARKISSUANCE_XML_PATH = XMLFILEPATH + "adminservice/markissuance/";
 	
@@ -53,5 +52,4 @@ public class MarkIssuanceTest extends BaseTest {
 		String actual = controller.executeAdminTask(command);
 		Assert.assertEquals(actual, expected);
 	}
-
 }

@@ -15,8 +15,8 @@ public class LibraryServiceImpl extends CommonBookServiceImpl implements Library
 	private static final String BOOK_REMOVE_MESSAGE_EXCEPTION = "Cannot remove book from wishlist.You subscribed to this book.";
 	private static final String UPDATE_NAME_NULL_MESSAGE_EXCEPTION = "Cannot update name with empty string.";
 	private static final String BOOK_NULL_MESSAGE_EXCEPTION = "There is no book with this id.";
-	UserDAO userDao = DAOFactory.getInstance().getUserDAO();
-	BookDAO bookDao = DAOFactory.getInstance().getBookDAO();
+	private final UserDAO userDao = DAOFactory.getInstance().getUserDAO();
+	private final BookDAO bookDao = DAOFactory.getInstance().getBookDAO();
 
 	@Override
 	public boolean addBookToWishList(int userId, int bookId) throws ServiceException {

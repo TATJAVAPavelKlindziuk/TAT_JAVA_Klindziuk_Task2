@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import com.klindziuk.offlinelibrary.controller.util.RequestParser;
 
-public class AddBookToWishList extends BaseTest{
+public class AddBookToWishListTest extends BaseTest{
 	private static final String TOWISHLIST_XML_PATH = XMLFILEPATH + "libraryservice/addbooktowishlist/";
 	
 	@Test(priority = 0)

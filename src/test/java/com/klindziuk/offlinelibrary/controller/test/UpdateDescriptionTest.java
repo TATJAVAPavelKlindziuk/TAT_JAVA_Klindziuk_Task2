@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import com.klindziuk.offlinelibrary.controller.util.RequestParser;
 
-public class UpdateDescription extends BaseTest {
+public class UpdateDescriptionTest extends BaseTest {
 	private static final String UPDATEDECRIPTION_XML_PATH = XMLFILEPATH + "adminservice/updatebookdescription/";
 	
 	@Test(priority = 0)
