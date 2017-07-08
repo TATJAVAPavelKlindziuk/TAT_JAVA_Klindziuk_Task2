@@ -11,6 +11,8 @@ public class Subscription implements Serializable {
 	private Timestamp start;
 	private Timestamp finish;
 	private boolean isActive;
+	
+	public Subscription() {}
 
 	public Subscription(int userId, int bookId, boolean isActive) {
 		this.userId = userId;

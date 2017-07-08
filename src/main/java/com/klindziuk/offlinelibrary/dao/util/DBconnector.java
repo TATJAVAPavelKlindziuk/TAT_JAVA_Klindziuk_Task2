@@ -10,6 +10,7 @@ import java.sql.SQLException;
 public class DBconnector {
 
 	private static final String URL = "jdbc:mysql://localhost:3306/library";
+	private static final String CLASS_NAME = "com.mysql.jdbc.Driver";
 	private static final String USERNAME = "root";
 	private static final String PASSWORD = "root";
 	private static DBconnector instance = null;
@@ -25,7 +26,7 @@ public class DBconnector {
 	public void connect() throws SQLException {
 		if (jdbcConnection == null || jdbcConnection.isClosed()) {
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
+				Class.forName(CLASS_NAME);
 			} catch (ClassNotFoundException e) {
 				throw new SQLException(e);
 			}

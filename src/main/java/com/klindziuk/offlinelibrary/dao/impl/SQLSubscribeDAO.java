@@ -22,10 +22,12 @@ public class SQLSubscribeDAO implements SubscribeDAO {
 	private static final String SB_START_COLUMN_LABEL = "sb_start";
 	private static final String SB_FINISH_COLUMN_LABEL = "sb_finish";
 	private static final String SB_IS_ACTIVE_LABEL = "sb_is_active";
-	private static final String SELECT_ALL_SUBSCRIPTIONS_QUERY = "SELECT * FROM subscriptions";
 	private static final String SQL_EXCEPTION_MESSAGE = "Cannot perform SQL command";
+	private static final String EMPTY_EXCEPTION_MESSAGE = "There are no subscriptions";
 	private static final String ADD_SB_QUERY = "INSERT INTO subscriptions (sb_user, sb_book, sb_is_active) VALUES (?, ?, ?)";
 	private static final String UPDATE_SB_QUERY = "UPDATE subscriptions SET sb_is_active = ? WHERE sb_user = ? AND sb_book = ?";
+	private static final String SELECT_ALL_SUBSCRIPTIONS_QUERY = "SELECT sb_id, sb_user, sb_book, sb_start, sb_finish,"
+			+ " sb_is_active FROM subscriptions";
 
 	DBconnector connector;
 	PreparedStatement preparedStatement;
@@ -130,6 +132,9 @@ public class SQLSubscribeDAO implements SubscribeDAO {
 				boolean isActive = resultSet.getBoolean(SB_IS_ACTIVE_LABEL);
 				Subscription sb = new Subscription(id, userId, bookId, start, finish, isActive);
 				subscriptions.add(sb);
+			}
+			if(subscriptions.isEmpty()) {
+				throw new DAOException(EMPTY_EXCEPTION_MESSAGE);
 			}
 		} catch (SQLException sqlex) {
 			sqlex.printStackTrace();

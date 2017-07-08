@@ -16,7 +16,7 @@ import com.klindziuk.offlinelibrary.dao.util.DBconnector;
 import com.klindziuk.offlinelibrary.model.Book;
 
 public class SQLBookDAO implements BookDAO {
-	
+
 	private static final boolean SET_BOOK_DEPRECATED = true;
 	private static final boolean SET_IS_AVAILABLE = true;
 	private static final boolean SET_IS_UNAVAILABLE = false;
@@ -27,8 +27,6 @@ public class SQLBookDAO implements BookDAO {
 	private static final String BOOK_IS_AVAILABLE_COLUMN_LABEL = "isAvailable";
 	private static final String BOOK_IS_DEPRECATED_LABEL = "isDeprecated";
 	private static final String BOOKS_ADDITION_DATE_COLUMN_LABEL = "additionDate";
-	private static final String GET_BOOK_QUERY = "SELECT * FROM books WHERE id = ?";
-	private static final String SELECT_ALL_BOOK_QUERY = "SELECT * FROM books ";
 	private static final String BOOK_UPDATE_QUERY = "UPDATE books SET isAvailable = ?  WHERE id = ?";
 	private static final String BOOK_NAME_QUERY = "SELECT id, name from books";
 	private static final String BOOK_AUTHOR_QUERY = "SELECT id, author from books";
@@ -37,9 +35,14 @@ public class SQLBookDAO implements BookDAO {
 	private static final String DEPRECATE_BOOK_QUERY = "UPDATE books SET name = ?, author = ?, year = ?, isAvailable = ?, isDeprecated = ? WHERE id = ?";
 	private static final String DELETE_BOOK_QUERY = "DELETE FROM books where id = ?";
 	private static final String SQL_EXCEPTION_MESSAGE = "Cannot perform SQL command";
+	private static final String EMPTY_EXCEPTION_MESSAGE = "Unfortunatelly we don't have this books.";
 	private static final String FINDBY_NAME_EXCEPTION_MESSAGE = "There are no books with this name";
 	private static final String FINDBY_AUTHOR_EXCEPTION_MESSAGE = "There are no authors with this name";
-	private static final String SELECT_USER_BOOKS_QUERY = "SELECT DISTINCT * FROM library.books "
+	private static final String GET_BOOK_QUERY = "SELECT books.id, books.name, books.author, books.year,"
+			+ " books.isAvailable, books.isDeprecated, books.additionDate FROM books WHERE id = ?";
+	private static final String SELECT_ALL_BOOK_QUERY = "SELECT books.id, books.name, books.author, books.year,"
+			+ " books.isAvailable, books.isDeprecated, books.additionDate FROM books ";
+	private static final String SELECT_USER_BOOKS_QUERY = "SELECT DISTINCT books.id, books.name, books.author, books.year, books.isAvailable, books.isDeprecated, books.additionDate FROM library.books "
 			+ "INNER JOIN library.subscriptions ON library.books.id = library.subscriptions.sb_book "
 			+ "INNER JOIN library.users ON library.users.id = library.subscriptions.sb_user "
 			+ "WHERE library.users.id = ? AND subscriptions.sb_is_active = 1";
@@ -200,9 +203,12 @@ public class SQLBookDAO implements BookDAO {
 				boolean isDeprecated = resultSet.getBoolean(BOOK_IS_DEPRECATED_LABEL);
 				Timestamp additionDate = resultSet.getTimestamp(BOOKS_ADDITION_DATE_COLUMN_LABEL);
 				book = new Book(id, name, author, year, isAvailable, isDeprecated, additionDate);
+			} else {
+				throw new DAOException(EMPTY_EXCEPTION_MESSAGE);
 			}
 		} catch (SQLException sqlex) {
 			sqlex.printStackTrace();
+			throw new DAOException(sqlex, SQL_EXCEPTION_MESSAGE);
 		} finally {
 			try {
 				resultSet.close();
@@ -237,6 +243,9 @@ public class SQLBookDAO implements BookDAO {
 				Timestamp additionDate = resultSet.getTimestamp(BOOKS_ADDITION_DATE_COLUMN_LABEL);
 				Book book = new Book(id, name, author, year, isAvailable, isDeprecated, additionDate);
 				books.add(book);
+			}
+			if (books.isEmpty()) {
+				throw new DAOException(EMPTY_EXCEPTION_MESSAGE);
 			}
 		} catch (SQLException sqlex) {
 			sqlex.printStackTrace();
@@ -296,11 +305,11 @@ public class SQLBookDAO implements BookDAO {
 		}
 		return books;
 	}
-
+	
 	@Override
 	public List<Book> findByName(String name) throws DAOException {
 		List<Book> list = new ArrayList<>();
-		Map<Integer,String> map = new HashMap<>();
+		Map<Integer, String> map = new HashMap<>();
 		int bookId = 0;
 		String searchedBookName = "";
 		try {
@@ -312,13 +321,14 @@ public class SQLBookDAO implements BookDAO {
 				searchedBookName = resultSet.getString(BOOK_NAME_COLUMN_LABEL);
 				map.put(bookId, searchedBookName);
 			}
-			for (Map.Entry<Integer, String> entry : map.entrySet())
-			{
+			for (Map.Entry<Integer, String> entry : map.entrySet()) {
 				if (name.contains(entry.getValue())) {
 					list.add(getBook(entry.getKey()));
 				}
 			}
-			
+			if (list.isEmpty()) {
+				throw new DAOException(EMPTY_EXCEPTION_MESSAGE);
+			}
 		} catch (SQLException sqlex) {
 			sqlex.printStackTrace();
 			throw new DAOException(sqlex, FINDBY_NAME_EXCEPTION_MESSAGE);
@@ -334,11 +344,11 @@ public class SQLBookDAO implements BookDAO {
 		}
 		return list;
 	}
-	
+
 	@Override
 	public List<Book> findByAuthor(String author) throws DAOException {
 		List<Book> list = new ArrayList<>();
-		Map<Integer,String> map = new HashMap<>();
+		Map<Integer, String> map = new HashMap<>();
 		int bookId = 0;
 		String searchedAuthorName = "";
 		try {
@@ -350,13 +360,14 @@ public class SQLBookDAO implements BookDAO {
 				searchedAuthorName = resultSet.getString(BOOK_AUTHOR_COLUMN_LABEL);
 				map.put(bookId, searchedAuthorName);
 			}
-			for (Map.Entry<Integer, String> entry : map.entrySet())
-			{
+			for (Map.Entry<Integer, String> entry : map.entrySet()) {
 				if (author.contains(entry.getValue())) {
 					list.add(getBook(entry.getKey()));
 				}
 			}
-			
+			if (list.isEmpty()) {
+				throw new DAOException(EMPTY_EXCEPTION_MESSAGE);
+			}
 		} catch (SQLException sqlex) {
 			sqlex.printStackTrace();
 			throw new DAOException(sqlex, FINDBY_AUTHOR_EXCEPTION_MESSAGE);
@@ -397,7 +408,7 @@ public class SQLBookDAO implements BookDAO {
 		}
 		return rowUpdated;
 	}
-	
+
 	@Override
 	public boolean setBookUnavailable(int bookId) throws DAOException {
 		boolean rowUpdated = false;

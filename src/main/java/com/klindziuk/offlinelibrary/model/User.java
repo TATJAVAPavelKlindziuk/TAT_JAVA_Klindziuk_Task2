@@ -16,6 +16,8 @@ public class User implements Serializable {
 	private boolean isBanned;
 	private Timestamp creationDate;
 	private List<Book> giveUpList;
+	
+	public User() {}
 			
 	public User(String login, String password,String name) {
 		this.login = login;
