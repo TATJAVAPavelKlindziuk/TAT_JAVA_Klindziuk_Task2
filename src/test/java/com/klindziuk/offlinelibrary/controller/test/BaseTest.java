@@ -1,11 +1,13 @@
 package com.klindziuk.offlinelibrary.controller.test;
 
 import com.klindziuk.offlinelibrary.controller.Controller;
+import com.klindziuk.offlinelibrary.controller.util.RequestParser;
 import com.klindziuk.offlinelibrary.controller.util.SqlScriptRunner;
 import com.klindziuk.offlinelibrary.dao.util.DBconnector;
 
 import org.testng.annotations.BeforeClass;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -18,15 +20,16 @@ public class BaseTest {
 	protected static final String SQLFILEPATH = "C:/Users/Pavel_Klindziuk/Program_Files/eclipse/workspace/offlinelibrary/sql/";
 	protected static final String START_PREPARING_MESSAGE = "Preparing test environment...";
 	protected static final String FINISH_PREPARING_MESSAGE = "Environment prepared successfully.";
+	protected static final String PERFORMING_MESSAGE = "Performing test case from - ";
 	protected static final String TEST_FINISH_MESSAGE = "Tests runs are finished";
 	protected static final String EMPTY_STRING_EXCEPTION_MESSAGE = "Cannot perform this operation.Parameters cannot be null or empty.";
 	protected static final String SPEC_STRING_EXCEPTION_MESSAGE = "Cannot perform this operation.Only letters,dots,minus and whitespaces are allowed.";
 	protected static final String NUMBER_EXCEPTION_MESSAGE = "Cannot perform this operation.Only numbers allowed.Id cannot be zero.";
+	protected static final String NO_FILE_EXCEPTION_MESSAGE = "Cannot find file ";
 	protected Controller controller;
 	protected DBconnector connector;
 	protected Connection connection;
-	protected String request;
-
+	
 	@BeforeClass
 	public void beforeClass() throws ClassNotFoundException, SQLException {
 		logger.info(START_PREPARING_MESSAGE);
@@ -54,7 +57,17 @@ public class BaseTest {
 	public void afterClass() {
 		controller = null;
 		connector = null;
-		request = null;
 		logger.info(TEST_FINISH_MESSAGE);
+	}
+	
+	protected String setCommand(String xmlPath) {
+		String result = "";
+		try {
+			result = RequestParser.readFile(XMLFILEPATH + xmlPath);
+			logger.info(PERFORMING_MESSAGE + XMLFILEPATH + xmlPath);
+		} catch (IOException ioex) {
+			logger.error(NO_FILE_EXCEPTION_MESSAGE + XMLFILEPATH + xmlPath, ioex);
+		}
+		return result;
 	}
 }

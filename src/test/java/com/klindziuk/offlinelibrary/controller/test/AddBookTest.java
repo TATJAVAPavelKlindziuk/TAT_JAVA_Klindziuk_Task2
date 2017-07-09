@@ -1,65 +1,60 @@
 package com.klindziuk.offlinelibrary.controller.test;
 
-import java.io.IOException;
-
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import com.klindziuk.offlinelibrary.controller.util.RequestParser;
-
 public class AddBookTest extends BaseTest {
-	private static final String ADDBOOK_XML_PATH = XMLFILEPATH + "adminservice/addbook/";
-	
+		
 	@Test(priority = 0)
-	public void addBooksSmokeTest() throws IOException {
-		request = RequestParser.readFile(ADDBOOK_XML_PATH + "addbook.xml");
-		String actual = controller.executeAdminTask(request);
+	public void addBooksSmokeTest() {
+		String command = setCommand("addbook/addbook.xml");
+		String actual = controller.executeAdminTask(command);
 		String expected = "Book added successfully.";
 		Assert.assertEquals(actual, expected);
 	}
 	
 	@DataProvider
-	public Object[][] addBookEmptyFieldsDp() throws IOException {
+	public Object[][] addBookEmptyFieldsDp() {
 		return new Object[][] { 
-			    { ADDBOOK_XML_PATH + "emptyname.xml", EMPTY_STRING_EXCEPTION_MESSAGE },
-				{ ADDBOOK_XML_PATH + "emptyauthor.xml", EMPTY_STRING_EXCEPTION_MESSAGE },
-				{ ADDBOOK_XML_PATH + "emptyyear.xml", EMPTY_STRING_EXCEPTION_MESSAGE }, };
+			    { "addbook/emptyname.xml", EMPTY_STRING_EXCEPTION_MESSAGE },
+				{ "addbook/emptyauthor.xml", EMPTY_STRING_EXCEPTION_MESSAGE },
+				{ "addbook/emptyyear.xml", EMPTY_STRING_EXCEPTION_MESSAGE }, };
 	}
 
 	@Test(priority = 1, dataProvider = "addBookEmptyFieldsDp")
-	public void addBookEmptyFieldsTest(String request, String expected) throws IOException {
-		String command = RequestParser.readFile(request);
+	public void addBookEmptyFieldsTest(String request, String expected) {
+		String command = setCommand(request);
 		String actual = controller.executeAdminTask(command);
 		Assert.assertEquals(actual, expected);
 	}
 
 	@DataProvider
-	public Object[][] addBookSpecFieldsDp() throws IOException {
+	public Object[][] addBookSpecFieldsDp() {
 		return new Object[][] {
-			    { ADDBOOK_XML_PATH + "specname.xml", SPEC_STRING_EXCEPTION_MESSAGE },
-				{ ADDBOOK_XML_PATH + "specauthor.xml", SPEC_STRING_EXCEPTION_MESSAGE },
-				{ ADDBOOK_XML_PATH + "specyear.xml", NUMBER_EXCEPTION_MESSAGE }, };
+			    { "addbook/specname.xml", SPEC_STRING_EXCEPTION_MESSAGE },
+				{ "addbook/specauthor.xml", SPEC_STRING_EXCEPTION_MESSAGE },
+				{ "addbook/specyear.xml", NUMBER_EXCEPTION_MESSAGE }, };
 	}
 
-	@Test(priority = 3, dataProvider = "addBookSpecFieldsDp")
-	public void addBookSpecFieldsTest(String request, String expected) throws IOException {
-		String command = RequestParser.readFile(request);
+	@Test(priority = 2, dataProvider = "addBookSpecFieldsDp")
+	public void addBookSpecFieldsTest(String request, String expected) {
+		String command = setCommand(request);
 		String actual = controller.executeAdminTask(command);
 		Assert.assertEquals(actual, expected);
 	}
 
 	@DataProvider
-	public Object[][] addBookNullFieldsDp() throws IOException {
+	public Object[][] addBookNullFieldsDp() {
 		return new Object[][] {
-			    { ADDBOOK_XML_PATH + "nullname.xml", SPEC_STRING_EXCEPTION_MESSAGE },
-				{ ADDBOOK_XML_PATH + "nullauthor.xml", SPEC_STRING_EXCEPTION_MESSAGE },
-				{ ADDBOOK_XML_PATH + "nullyear.xml", NUMBER_EXCEPTION_MESSAGE }, };
+			    { "addbook/nullname.xml", SPEC_STRING_EXCEPTION_MESSAGE },
+				{ "addbook/nullauthor.xml", SPEC_STRING_EXCEPTION_MESSAGE },
+				{ "addbook/nullyear.xml", NUMBER_EXCEPTION_MESSAGE }, };
 	}
 
-	@Test(priority = 4, dataProvider = "addBookNullFieldsDp")
-	public void addBookNullFieldsTest(String request, String expected) throws IOException {
-		String command = RequestParser.readFile(request);
+	@Test(priority = 3, dataProvider = "addBookNullFieldsDp")
+	public void addBookNullFieldsTest(String request, String expected) {
+		String command = setCommand(request);
 		String actual = controller.executeAdminTask(command);
 		Assert.assertEquals(actual, expected);
 	}
