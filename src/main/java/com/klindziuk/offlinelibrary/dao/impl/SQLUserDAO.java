@@ -61,7 +61,7 @@ public class SQLUserDAO implements UserDAO {
 		int matchPassword = 0;
 		try {
 			connector.connect();
-			preparedStatement = connector.jdbcConnection.prepareStatement(USER_CREDENTIALS_QUERY);
+			preparedStatement = connector.getJdbcConnection().prepareStatement(USER_CREDENTIALS_QUERY);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				searchedLogin = resultSet.getString(USER_LOGIN_COLUMN_LABEL);
@@ -105,7 +105,7 @@ public class SQLUserDAO implements UserDAO {
 		boolean rowInserted = false;
 		try {
 			connector.connect();
-			preparedStatement = connector.jdbcConnection.prepareStatement(USER_REGISTER_QUERY);
+			preparedStatement = connector.getJdbcConnection().prepareStatement(USER_REGISTER_QUERY);
 			preparedStatement.setString(1, user.getLogin());
 			preparedStatement.setString(2, user.getPassword());
 			preparedStatement.setString(3, user.getName());
@@ -135,7 +135,7 @@ public class SQLUserDAO implements UserDAO {
 		User user = null;
 		try {
 			connector.connect();
-			preparedStatement = connector.jdbcConnection.prepareStatement(GET_USER_QUERY);
+			preparedStatement = connector.getJdbcConnection().prepareStatement(GET_USER_QUERY);
 			preparedStatement.setInt(1, id);
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
@@ -171,7 +171,7 @@ public class SQLUserDAO implements UserDAO {
 		boolean rowInserted = false;
 		try {
 			connector.connect();
-			preparedStatement = connector.jdbcConnection.prepareStatement(ADD_BOOK_TO_WISHLIST_QUERY);
+			preparedStatement = connector.getJdbcConnection().prepareStatement(ADD_BOOK_TO_WISHLIST_QUERY);
 			preparedStatement.setInt(1, userId);
 			preparedStatement.setInt(2, bookId);
 			rowInserted = preparedStatement.executeUpdate() > 0;
@@ -196,7 +196,7 @@ public class SQLUserDAO implements UserDAO {
 		boolean rowInserted = false;
 		try {
 			connector.connect();
-			preparedStatement = connector.jdbcConnection.prepareStatement(REMOVE_BOOK_FROM_WISHLIST_QUERY);
+			preparedStatement = connector.getJdbcConnection().prepareStatement(REMOVE_BOOK_FROM_WISHLIST_QUERY);
 			preparedStatement.setInt(1, userId);
 			preparedStatement.setInt(2, bookId);
 			rowInserted = preparedStatement.executeUpdate() > 0;
@@ -221,7 +221,7 @@ public class SQLUserDAO implements UserDAO {
 		boolean rowUpdated = false;
 		try {
 			connector.connect();
-			preparedStatement = connector.jdbcConnection.prepareStatement(USER_UPDATE_QUERY);
+			preparedStatement = connector.getJdbcConnection().prepareStatement(USER_UPDATE_QUERY);
 			preparedStatement.setString(1, name);
 			preparedStatement.setInt(2, userId);
 			rowUpdated = preparedStatement.executeUpdate() > 0;
@@ -266,7 +266,7 @@ public class SQLUserDAO implements UserDAO {
 		List<User> users = new ArrayList<>();
 		try {
 			connector.connect();
-			statement = connector.jdbcConnection.createStatement();
+			statement = connector.getJdbcConnection().createStatement();
 			resultSet = statement.executeQuery(SELECT_ALL_USERS_QUERY);
 			while (resultSet.next()) {
 				int id = resultSet.getInt(USER_ID_COLUMN_LABEL);
@@ -307,7 +307,7 @@ public class SQLUserDAO implements UserDAO {
 		try {
 			String sql = query;
 			connector.connect();
-			preparedStatement = connector.jdbcConnection.prepareStatement(sql);
+			preparedStatement = connector.getJdbcConnection().prepareStatement(sql);
 			preparedStatement.setBoolean(1, isEnable);
 			preparedStatement.setInt(2, userId);
 			rowUpdated = preparedStatement.executeUpdate() > 0;

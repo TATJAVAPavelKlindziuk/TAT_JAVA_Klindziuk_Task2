@@ -63,7 +63,7 @@ public class SQLBookDAO implements BookDAO {
 		boolean rowInserted = false;
 		try {
 			connector.connect();
-			preparedStatement = connector.jdbcConnection.prepareStatement(ADD_BOOK_QUERY);
+			preparedStatement = connector.getJdbcConnection().prepareStatement(ADD_BOOK_QUERY);
 			preparedStatement.setString(1, book.getName());
 			preparedStatement.setString(2, book.getAuthor());
 			preparedStatement.setInt(3, book.getYear());
@@ -91,7 +91,7 @@ public class SQLBookDAO implements BookDAO {
 		boolean rowUpdated = false;
 		try {
 			connector.connect();
-			preparedStatement = connector.jdbcConnection.prepareStatement(UPDATE_BOOK_QUERY);
+			preparedStatement = connector.getJdbcConnection().prepareStatement(UPDATE_BOOK_QUERY);
 			preparedStatement.setString(1, name);
 			preparedStatement.setString(2, author);
 			preparedStatement.setInt(3, bookId);
@@ -117,7 +117,7 @@ public class SQLBookDAO implements BookDAO {
 		boolean rowUpdated = false;
 		try {
 			connector.connect();
-			preparedStatement = connector.jdbcConnection.prepareStatement(DEPRECATE_BOOK_QUERY);
+			preparedStatement = connector.getJdbcConnection().prepareStatement(DEPRECATE_BOOK_QUERY);
 			preparedStatement.setString(1, book.getName());
 			preparedStatement.setString(2, book.getAuthor());
 			preparedStatement.setInt(3, book.getYear());
@@ -146,7 +146,7 @@ public class SQLBookDAO implements BookDAO {
 		boolean rowDeleted = false;
 		try {
 			connector.connect();
-			preparedStatement = connector.jdbcConnection.prepareStatement(DELETE_BOOK_QUERY);
+			preparedStatement = connector.getJdbcConnection().prepareStatement(DELETE_BOOK_QUERY);
 			preparedStatement.setInt(1, id);
 			rowDeleted = preparedStatement.executeUpdate() > 0;
 		} catch (SQLException sqlex) {
@@ -170,7 +170,7 @@ public class SQLBookDAO implements BookDAO {
 		boolean rowDeleted = false;
 		try {
 			connector.connect();
-			preparedStatement = connector.jdbcConnection.prepareStatement(DELETE_BOOK_QUERY);
+			preparedStatement = connector.getJdbcConnection().prepareStatement(DELETE_BOOK_QUERY);
 			preparedStatement.setInt(1, book.getId());
 			rowDeleted = preparedStatement.executeUpdate() > 0;
 		} catch (SQLException sqlex) {
@@ -194,7 +194,7 @@ public class SQLBookDAO implements BookDAO {
 		Book book = null;
 		try {
 			connector.connect();
-			preparedStatement = connector.jdbcConnection.prepareStatement(GET_BOOK_QUERY);
+			preparedStatement = connector.getJdbcConnection().prepareStatement(GET_BOOK_QUERY);
 			preparedStatement.setInt(1, id);
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
@@ -233,7 +233,7 @@ public class SQLBookDAO implements BookDAO {
 		List<Book> books = new ArrayList<>();
 		try {
 			connector.connect();
-			statement = connector.jdbcConnection.createStatement();
+			statement = connector.getJdbcConnection().createStatement();
 			resultSet = statement.executeQuery(SELECT_ALL_BOOK_QUERY);
 			while (resultSet.next()) {
 				int id = resultSet.getInt(BOOK_ID_COLUMN_LABEL);
@@ -274,7 +274,7 @@ public class SQLBookDAO implements BookDAO {
 		List<Book> books = new ArrayList<>();
 		try {
 			connector.connect();
-			preparedStatement = connector.jdbcConnection.prepareStatement(SELECT_USER_BOOKS_QUERY);
+			preparedStatement = connector.getJdbcConnection().prepareStatement(SELECT_USER_BOOKS_QUERY);
 			preparedStatement.setInt(1, userId);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
@@ -316,7 +316,7 @@ public class SQLBookDAO implements BookDAO {
 		String searchedBookName = "";
 		try {
 			connector.connect();
-			preparedStatement = connector.jdbcConnection.prepareStatement(BOOK_NAME_QUERY);
+			preparedStatement = connector.getJdbcConnection().prepareStatement(BOOK_NAME_QUERY);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				bookId = resultSet.getInt(BOOK_ID_COLUMN_LABEL);
@@ -355,7 +355,7 @@ public class SQLBookDAO implements BookDAO {
 		String searchedAuthorName = "";
 		try {
 			connector.connect();
-			preparedStatement = connector.jdbcConnection.prepareStatement(BOOK_AUTHOR_QUERY);
+			preparedStatement = connector.getJdbcConnection().prepareStatement(BOOK_AUTHOR_QUERY);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				bookId = resultSet.getInt(BOOK_ID_COLUMN_LABEL);
@@ -391,7 +391,7 @@ public class SQLBookDAO implements BookDAO {
 		boolean rowUpdated = false;
 		try {
 			connector.connect();
-			preparedStatement = connector.jdbcConnection.prepareStatement(BOOK_UPDATE_QUERY);
+			preparedStatement = connector.getJdbcConnection().prepareStatement(BOOK_UPDATE_QUERY);
 			preparedStatement.setBoolean(1, SET_IS_AVAILABLE);
 			preparedStatement.setInt(2, bookId);
 			rowUpdated = preparedStatement.executeUpdate() > 0;
@@ -416,7 +416,7 @@ public class SQLBookDAO implements BookDAO {
 		boolean rowUpdated = false;
 		try {
 			connector.connect();
-			preparedStatement = connector.jdbcConnection.prepareStatement(BOOK_UPDATE_QUERY);
+			preparedStatement = connector.getJdbcConnection().prepareStatement(BOOK_UPDATE_QUERY);
 			preparedStatement.setBoolean(1, SET_IS_UNAVAILABLE);
 			preparedStatement.setInt(2, bookId);
 			rowUpdated = preparedStatement.executeUpdate() > 0;

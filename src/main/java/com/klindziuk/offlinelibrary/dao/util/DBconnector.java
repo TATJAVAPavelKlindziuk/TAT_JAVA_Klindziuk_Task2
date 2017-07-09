@@ -14,7 +14,7 @@ public class DBconnector {
 	private static final String USERNAME = "root";
 	private static final String PASSWORD = "root";
 	private static DBconnector instance = null;
-	public Connection jdbcConnection;
+	private Connection jdbcConnection;
 
 	public static DBconnector getInstance() {
 		if (instance == null) {
@@ -39,9 +39,13 @@ public class DBconnector {
 			jdbcConnection.close();
 		}
 	}
-	
+		
 	public Connection getJdbcConnection() {
 		return jdbcConnection;
+	}
+
+	public void setJdbcConnection(Connection jdbcConnection) {
+		this.jdbcConnection = jdbcConnection;
 	}
 
 	public void setAutoCommitFalse() throws SQLException {

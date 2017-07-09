@@ -21,6 +21,7 @@ import com.klindziuk.offlinelibrary.model.User;
 
 public final class RequestParser {
 	private static final Logger logger = Logger.getLogger(RequestParser.class);
+	private final static int ITEM_POSITION = 0;
 	private final static String XML_ID_TAG = "id";
 	private final static String XML_IDUSER_TAG = "userId";
 	private final static String XML_IDBOOK_TAG = "bookId";
@@ -71,7 +72,7 @@ public final class RequestParser {
 			InputSource src = new InputSource();
 			src.setCharacterStream(new StringReader(request));
 			Document doc = builder.parse(src);
-			int id = RequestValidator.validateInt(doc.getElementsByTagName(XML_ID_TAG).item(0).getTextContent());
+			int id = RequestValidator.validateInt(doc.getElementsByTagName(XML_ID_TAG).item(ITEM_POSITION).getTextContent());
 			return id;
 		} catch (DOMException | ParserConfigurationException | SAXException | IOException e) {
 			logger.error(e.getMessage(), e);
@@ -89,7 +90,7 @@ public final class RequestParser {
 			src.setCharacterStream(new StringReader(request));
 			Document doc = builder.parse(src);
 			String command = RequestValidator
-					.validateString(doc.getElementsByTagName(XML_COMMAND_TAG).item(0).getTextContent());
+					.validateString(doc.getElementsByTagName(XML_COMMAND_TAG).item(ITEM_POSITION).getTextContent());
 			return command;
 		} catch (DOMException | ParserConfigurationException | SAXException | IOException e) {
 			logger.error(e.getMessage(), e);
@@ -107,7 +108,7 @@ public final class RequestParser {
 			src.setCharacterStream(new StringReader(request));
 			Document doc = builder.parse(src);
 			String name = RequestValidator
-					.validateString(doc.getElementsByTagName(XML_NAME_TAG).item(0).getTextContent());
+					.validateString(doc.getElementsByTagName(XML_NAME_TAG).item(ITEM_POSITION).getTextContent());
 			return name;
 		} catch (DOMException | ParserConfigurationException | SAXException | IOException e) {
 			logger.error(e.getMessage(), e);
@@ -127,9 +128,9 @@ public final class RequestParser {
 			Document doc = builder.parse(src);
 			System.out.println();
 			credentials[0] = RequestValidator
-					.validateString(doc.getElementsByTagName(XML_LOGIN_TAG).item(0).getTextContent());
+					.validateString(doc.getElementsByTagName(XML_LOGIN_TAG).item(ITEM_POSITION).getTextContent());
 			credentials[1] = RequestValidator
-					.validateString(doc.getElementsByTagName(XML_PASSWORD_TAG).item(0).getTextContent());
+					.validateString(doc.getElementsByTagName(XML_PASSWORD_TAG).item(ITEM_POSITION).getTextContent());
 		} catch (DOMException | ParserConfigurationException | SAXException | IOException e) {
 			logger.error(e.getMessage(), e);
 		}
@@ -148,9 +149,9 @@ public final class RequestParser {
 			Document doc = builder.parse(src);
 			System.out.println();
 			parameters[0] = RequestValidator
-					.validateInt(doc.getElementsByTagName(XML_IDUSER_TAG).item(0).getTextContent());
+					.validateInt(doc.getElementsByTagName(XML_IDUSER_TAG).item(ITEM_POSITION).getTextContent());
 			parameters[1] = RequestValidator
-					.validateInt(doc.getElementsByTagName(XML_IDBOOK_TAG).item(0).getTextContent());
+					.validateInt(doc.getElementsByTagName(XML_IDBOOK_TAG).item(ITEM_POSITION).getTextContent());
 		} catch (DOMException | ParserConfigurationException | SAXException | IOException e) {
 			logger.error(e.getMessage(), e);
 		}
@@ -169,11 +170,11 @@ public final class RequestParser {
 			Document doc = builder.parse(src);
 			System.out.println();
 			String login = RequestValidator
-					.validateString(doc.getElementsByTagName(XML_LOGIN_TAG).item(0).getTextContent());
+					.validateString(doc.getElementsByTagName(XML_LOGIN_TAG).item(ITEM_POSITION).getTextContent());
 			String password = RequestValidator
-					.validateString(doc.getElementsByTagName(XML_PASSWORD_TAG).item(0).getTextContent());
+					.validateString(doc.getElementsByTagName(XML_PASSWORD_TAG).item(ITEM_POSITION).getTextContent());
 			String name = RequestValidator
-					.validateString(doc.getElementsByTagName(XML_NAME_TAG).item(0).getTextContent());
+					.validateString(doc.getElementsByTagName(XML_NAME_TAG).item(ITEM_POSITION).getTextContent());
 			user = new User(login, name, password);
 		} catch (DOMException | ParserConfigurationException | SAXException | IOException e) {
 			logger.error(e.getMessage(), e);
@@ -193,10 +194,10 @@ public final class RequestParser {
 			Document doc = builder.parse(src);
 			System.out.println();
 			String name = RequestValidator
-					.validateString(doc.getElementsByTagName(XML_NAME_TAG).item(0).getTextContent());
+					.validateString(doc.getElementsByTagName(XML_NAME_TAG).item(ITEM_POSITION).getTextContent());
 			String author = RequestValidator
-					.validateString(doc.getElementsByTagName(XML_AUTHOR_TAG).item(0).getTextContent());
-			int year = RequestValidator.validateInt(doc.getElementsByTagName(XML_YEAR_TAG).item(0).getTextContent());
+					.validateString(doc.getElementsByTagName(XML_AUTHOR_TAG).item(ITEM_POSITION).getTextContent());
+			int year = RequestValidator.validateInt(doc.getElementsByTagName(XML_YEAR_TAG).item(ITEM_POSITION).getTextContent());
 			book = new Book(name, author, year);
 		} catch (DOMException | ParserConfigurationException | SAXException | IOException e) {
 			logger.error(e.getMessage(), e);
@@ -215,18 +216,18 @@ public final class RequestParser {
 			src.setCharacterStream(new StringReader(request));
 			Document doc = builder.parse(src);
 			System.out.println();
-			int id = RequestValidator.validateInt(doc.getElementsByTagName(XML_ID_TAG).item(0).getTextContent());
+			int id = RequestValidator.validateInt(doc.getElementsByTagName(XML_ID_TAG).item(ITEM_POSITION).getTextContent());
 			String name = RequestValidator
-					.validateString(doc.getElementsByTagName(XML_NAME_TAG).item(0).getTextContent());
+					.validateString(doc.getElementsByTagName(XML_NAME_TAG).item(ITEM_POSITION).getTextContent());
 			String author = RequestValidator
-					.validateString(doc.getElementsByTagName(XML_AUTHOR_TAG).item(0).getTextContent());
+					.validateString(doc.getElementsByTagName(XML_AUTHOR_TAG).item(ITEM_POSITION).getTextContent());
 			int year = RequestValidator.validateInt(doc.getElementsByTagName(XML_YEAR_TAG).item(0).getTextContent());
 			boolean isAvailable = RequestValidator
-					.validateBoolean(doc.getElementsByTagName(XML_AVAILABLE_TAG).item(0).getTextContent());
+					.validateBoolean(doc.getElementsByTagName(XML_AVAILABLE_TAG).item(ITEM_POSITION).getTextContent());
 			boolean isDeprecated = RequestValidator
-					.validateBoolean(doc.getElementsByTagName(XML_DEPRECATED_TAG).item(0).getTextContent());
+					.validateBoolean(doc.getElementsByTagName(XML_DEPRECATED_TAG).item(ITEM_POSITION).getTextContent());
 			Timestamp ts = RequestValidator
-					.validateTimestamp(doc.getElementsByTagName(XML_TIME_TAG).item(0).getTextContent());
+					.validateTimestamp(doc.getElementsByTagName(XML_TIME_TAG).item(ITEM_POSITION).getTextContent());
 			book = new Book(id, name, author, year, isAvailable, isDeprecated, ts);
 		} catch (DOMException | ParserConfigurationException | SAXException | IOException e) {
 			logger.error(e.getMessage(), e);

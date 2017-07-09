@@ -43,7 +43,7 @@ public class SQLSubscribeDAO implements SubscribeDAO {
 		boolean rowInserted = false;
 		try {
 			connector.connect();
-			preparedStatement = connector.jdbcConnection.prepareStatement(ADD_SB_QUERY);
+			preparedStatement = connector.getJdbcConnection().prepareStatement(ADD_SB_QUERY);
 			preparedStatement.setInt(1, userId);
 			preparedStatement.setInt(2, bookId);
 			preparedStatement.setBoolean(3, SB_IS_ACTIVE);
@@ -69,7 +69,7 @@ public class SQLSubscribeDAO implements SubscribeDAO {
 		boolean rowUpdated = false;
 		try {
 			connector.connect();
-			preparedStatement = connector.jdbcConnection.prepareStatement(UPDATE_SB_QUERY);
+			preparedStatement = connector.getJdbcConnection().prepareStatement(UPDATE_SB_QUERY);
 			preparedStatement.setBoolean(1, SET_SB_INACTIVE);
 			preparedStatement.setInt(2, userId);
 			preparedStatement.setInt(3, bookId);
@@ -95,7 +95,7 @@ public class SQLSubscribeDAO implements SubscribeDAO {
 		boolean rowUpdated = false;
 		try {
 			connector.connect();
-			preparedStatement = connector.jdbcConnection.prepareStatement(UPDATE_SB_QUERY);
+			preparedStatement = connector.getJdbcConnection().prepareStatement(UPDATE_SB_QUERY);
 			preparedStatement.setBoolean(1, SB_IS_ACTIVE);
 			preparedStatement.setInt(2, userId);
 			preparedStatement.setInt(3, bookId);
@@ -121,7 +121,7 @@ public class SQLSubscribeDAO implements SubscribeDAO {
 		List<Subscription> subscriptions = new ArrayList<>();
 		try {
 			connector.connect();
-			statement = connector.jdbcConnection.createStatement();
+			statement = connector.getJdbcConnection().createStatement();
 			resultSet = statement.executeQuery(SELECT_ALL_SUBSCRIPTIONS_QUERY);
 			while (resultSet.next()) {
 				int id = resultSet.getInt(SB_ID_COLUMN_LABEL);
