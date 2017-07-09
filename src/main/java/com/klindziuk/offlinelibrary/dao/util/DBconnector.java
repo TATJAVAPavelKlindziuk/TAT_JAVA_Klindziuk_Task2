@@ -8,7 +8,6 @@ import java.sql.SQLException;
  * This class provides connection to database.
  */
 public class DBconnector {
-
 	private static final String URL = "jdbc:mysql://localhost:3306/library";
 	private static final String CLASS_NAME = "com.mysql.jdbc.Driver";
 	private static final String USERNAME = "root";
@@ -39,7 +38,7 @@ public class DBconnector {
 			jdbcConnection.close();
 		}
 	}
-		
+
 	public Connection getJdbcConnection() {
 		return jdbcConnection;
 	}
