@@ -30,6 +30,39 @@
     <artifactId>log4j</artifactId>
     <version>1.2.17</version>
 </dependency>
-
+<dependency>
+    <groupId>org.testng</groupId>
+    <artifactId>testng</artifactId>
+    <version>6.11</version>
+    <scope>test</scope>
+</dependency>
   </dependencies>
+ <!-- PROPERTIES FOR RUN WITH JENKINS --> 
+  <build>
+  		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.14.1</version>
+				<configuration>
+				<systemPropertyVariables>
+        <log4j.configuration>log4j.properties</log4j.configuration>
+      </systemPropertyVariables>
+					<suiteXmlFiles>
+						<suiteXmlFile>task2suit.xml</suiteXmlFile>
+					</suiteXmlFiles>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<fork>true</fork>
+					<source>1.8</source>
+					<target>1.8</target>
+					<executable>C:\Program Files\Java\jdk1.8.0_101\bin\javac.exe</executable>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
